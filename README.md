@@ -19,7 +19,7 @@ pip install -r requirements.txt
 
 ## Structure
 ```bash
-breakpoint/
+dataset-forge/
 │
 ├── src/                      # Source code
 │   ├── dataset_generator.py  # Main dataset generation script
