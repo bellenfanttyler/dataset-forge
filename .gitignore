@@ -1,1 +1,6 @@
-models/stable-diffusion-inpainting/
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Ignoring the generated output datasets
+data/output

@@ -20,6 +20,7 @@ def load_stable_diffusion_inpainting_pipeline():
     """
     device = "cuda"
     model_path = "Uminosachi/realisticVisionV20_v20-inpainting"
+    #model_path = "stablediffusionapi/epicphotogasm"
 
     pipe = StableDiffusionInpaintPipeline.from_pretrained(
         model_path,
@@ -51,8 +52,13 @@ def generate_dataset(input_dir, output_dir, prompts_classes_dict, blur_strength=
     """
     # Load the inpainting pipeline
     pipe = load_stable_diffusion_inpainting_pipeline()
-    guidance_scale=5.5
+    guidance_scale=1
     num_samples = 1
+    negative_prompt = "(deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime), \
+            text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra \
+            fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, \
+            bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, \
+            missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck"
     generator = torch.Generator(device="cuda").manual_seed(1) # change the seed to get different results
 
     if not os.path.exists(output_dir):
@@ -67,7 +73,8 @@ def generate_dataset(input_dir, output_dir, prompts_classes_dict, blur_strength=
             # Generate mask and perform inpainting
             mask, bboxes = create_image_mask(base_image_np, num_masks=1)  # Adjust parameters as needed
             mask_image = Image.fromarray(mask).convert("RGB").resize((512, 512))
-            inpainted_image = pipe(prompt=prompt, 
+            inpainted_image = pipe(prompt=prompt,
+                                   negative_prompt = negative_prompt, 
                                    image=base_image,
                                    mask_image=mask_image,
                                    guidance_scale=guidance_scale,

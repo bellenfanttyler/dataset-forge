@@ -1,0 +1,18 @@
+device: cuda
+model_path: Uminosachi/realisticVisionV20_v20-inpainting # Hugging Face Model Path - will automatically download this model
+input_directory: data/base_images/warehouse
+output_directory: data/output/warehouse
+guidance_scale: 3.5
+num_samples: 1
+image_size: [512, 512]
+prompts_classes_dict:
+  "yellow forklift": "0"  # "yellow forklift" = model prompt, "0" = class id for object 
+  "metallic barrel": "1"  # "metallic barrel" = model prompt, "1" = class id for object 
+negative_prompt: "(deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime), \
+            text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra \
+            fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, \
+            bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, \
+            missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck"
+seed: 1
+
+
