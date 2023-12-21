@@ -12,14 +12,14 @@ def load_stable_diffusion_inpainting_pipeline():
     Load the Stable Diffusion Inpainting Pipeline.
 
     This function initializes and returns the Stable Diffusion Inpainting Pipeline
-    from Hugging Face's model hub. It is configured to use the 'runwayml/stable-diffusion-inpainting'
+    from Hugging Face's model hub. It is configured to use the 'Uminosachi/realisticVisionV20_v20-inpainting'
     model with 'fp16' revision for optimized performance.
 
     Returns:
     - pipe: StableDiffusionInpaintPipeline object, the loaded inpainting pipeline
     """
     device = "cuda"
-    model_path = "runwayml/stable-diffusion-inpainting"
+    model_path = "Uminosachi/realisticVisionV20_v20-inpainting"
 
     pipe = StableDiffusionInpaintPipeline.from_pretrained(
         model_path,
@@ -51,8 +51,8 @@ def generate_dataset(input_dir, output_dir, prompts_classes_dict, blur_strength=
     """
     # Load the inpainting pipeline
     pipe = load_stable_diffusion_inpainting_pipeline()
-    guidance_scale=7.5
-    num_samples = 3
+    guidance_scale=5.5
+    num_samples = 1
     generator = torch.Generator(device="cuda").manual_seed(1) # change the seed to get different results
 
     if not os.path.exists(output_dir):
