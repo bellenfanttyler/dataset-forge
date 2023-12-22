@@ -7,7 +7,7 @@ import shutil
 from PIL import Image
 import torch
 from diffusers import StableDiffusionInpaintPipeline
-from inpainting import create_image_mask
+from .inpainting import create_image_mask
 
 def load_config(config_file):
     """
@@ -83,7 +83,3 @@ def generate_dataset(config_path):
     for file_path in image_files:
         for result in process_image(file_path, pipe, config, prompts_classes_dict):
             save_results(*result, output_dir)
-
-if __name__ == "__main__":
-    config_path = 'src/inpainting_config.yaml'
-    generate_dataset(config_path)
