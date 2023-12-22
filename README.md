@@ -3,8 +3,30 @@
 
 # Dataset Forge
 ## Overview
-This project is designed to create a diverse, labeled image dataset using Generative AI inpainting techniques, leveraging the Stable Diffusion Inpainting Pipeline. It includes Python functions to programatically create randomized image masks (for identifying regions for inpainting) and to automate the process of creating an object detection image dataset (YOLO Format) from a collection of base images and text prompts.
+This project is designed to create a diverse, labeled image dataset using Generative AI inpainting techniques, leveraging the Stable Diffusion Inpainting Pipeline. It automates the process of creating an object detection image dataset (YOLO Format) from a collection of base images and text prompts of objects.
 ![example_outputs](/static/example_output_pic_labeled.png)
+
+## Advantages
+> ### Enhanced Efficiency and Scalability
+> - **Speed**: Automating dataset curation and labeling with Dataset Forge is exponentially faster than manual processes. It significantly reduces the time required to build a large-scale, labeled dataset.
+> - **Scalability**: The ability to generate and label thousands of images with minimal human intervention makes Dataset Forge ideal for projects requiring large datasets.
+> 
+> ### Cost-Effectiveness
+> - **Reduced Labor Costs**:  Manual dataset curation and labeling are labor-intensive and costly. Dataset Forge minimizes the need for human annotators, thereby reducing overall project costs.
+> 
+> ### Enhanced Accuracy and Consistency
+> - **Consistent Labeling**: Human labeling is prone to inconsistencies and errors. Dataset Forge offers a standardized, rule-based approach, ensuring uniformity and accuracy in labels across the dataset.
+> 
+> ### Customization and Flexibility
+> - **Adaptability**: The tool's configuration can be easily modified to suit various project needs, allowing for the generation of diverse datasets tailored to specific requirements.
+> - **Diverse Data Generation**: Dataset Forge can create a wide range of images using different inpainting prompts, thereby ensuring a diverse and comprehensive dataset.
+> 
+> ### Innovative Capabilities
+> - **Inpainting Precision**: The use of Generative AI inpainting techniques allows for precise object placement and integration within images, which is difficult to achieve manually.
+> - **Integration with Advanced AI Models**: The tool's compatibility with various diffusion models from Hugging Face allows for continuous improvement and integration of cutting-edge AI technologies.
+>   
+> ### Dataset Evolution
+> - **Dynamic Dataset Enhancement**: The tool can continuously update and expand datasets with new images and labels, increasing the diverstity of the dataset for enhancing model training.
 
 ## Features
 1. Inpainting of objects into images based on textual prompts.
@@ -12,7 +34,7 @@ This project is designed to create a diverse, labeled image dataset using Genera
 3. Automated creation of a labeled image dataset in YOLO bounding box format.
 
 ## Requirements
-To run this project, you will need Python 3.10.x along with several dependencies listed in `requirements.txt`. It is recommended to use a virtual environment. Perform the Pytorch installation according to the official installation instructions for the version number listed in the requirements file and for your system configuration (https://pytorch.org/get-started/locally/). Then, install the remaining requirements using:
+To run this project, you will need `Python 3.10.X` along with several dependencies listed in `requirements.txt`. It is recommended to use a virtual environment. Perform the Pytorch installation according to the official installation instructions for the version number listed in the requirements file and for your system configuration (https://pytorch.org/get-started/locally/). Then, install the remaining requirements using:
 
 ```bash
 pip install -r requirements.txt
@@ -54,6 +76,11 @@ tools/generate_inpaint.py
 
 ## Notebooks
 The notebooks/ directory contains Jupyter notebooks for demonstration and testing. These notebooks provide examples of how to use the functions in this project.
+
+## Feature Roadmap
+1. Include functionality to generate the base image dataset in addition to the inpainting one.
+2. Enhance bounding box 'tightness' for even better labels
+3. User Interface
 
 ## Known Issues
 1. Sometimes the inpainting fails to generate any noticeable changes.
