@@ -58,6 +58,7 @@ The notebooks/ directory contains Jupyter notebooks for demonstration and testin
 ## Known Issues
 1. Sometimes the inpainting fails to generate any noticeable changes.
 2. Bounding boxes are slightly loose (not tightly hugging the generated objects).
+3. Doesn't work with all diffusion models on Hugging Face.
 
 ## License
 The diffusion model weights are licensed under creativeml-openrail-m. 
