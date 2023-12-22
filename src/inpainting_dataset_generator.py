@@ -3,6 +3,7 @@ import glob
 import yaml
 import numpy as np
 import random
+import shutil
 from PIL import Image
 import torch
 from diffusers import StableDiffusionInpaintPipeline
@@ -36,8 +37,9 @@ def process_image(file_path, pipe, config, prompts_classes_dict):
     for serial, (prompt, class_name) in enumerate(prompts_classes_dict.items(), start=1):
         mask, bboxes = create_image_mask(base_image_np, num_masks=1)
         mask_image = Image.fromarray(mask).convert("RGB").resize(config['image_size'])
-        
-        inpainted_image = pipe(prompt=prompt,
+        prompt = '(' + prompt + ')'    # This will add emphasis to the user's prompt
+        enhanced_prompt = prompt + ", " + config['prompt_enhancement']  # This adds additional enhancement words to the prompt
+        inpainted_image = pipe(prompt=enhanced_prompt,
                                negative_prompt=config['negative_prompt'], 
                                image=base_image,
                                mask_image=mask_image,
@@ -61,17 +63,21 @@ def save_results(inpainted_image, bboxes, file_path, class_name, serial, output_
             yolo_bbox = ' '.join(map(str, [class_name, *bbox]))
             bbox_file.write(yolo_bbox + '\n')
 
-def generate_dataset(config):
+def generate_dataset(config_path):
     """
-    Generate an image dataset using inpainting based on provided prompts and classes.
+    Generate an image dataset using inpainting based on provided prompts and classes in the config file.
     """
+    config = load_config(config_path)
     pipe = load_stable_diffusion_inpainting_pipeline(config)
     input_dir = config['input_directory']
     output_dir = config['output_directory']
     prompts_classes_dict = config['prompts_classes_dict']
 
     if not os.path.exists(output_dir):
+        output_config_path = output_dir + "/config"
         os.makedirs(output_dir)
+        os.makedirs(output_config_path)
+        shutil.copy(config_path, output_config_path + '/' + os.path.basename(config_path))
 
     image_files = glob.glob(input_dir + '/*.[pj][np][g]')  # jpg, png, jpeg
     for file_path in image_files:
@@ -79,5 +85,5 @@ def generate_dataset(config):
             save_results(*result, output_dir)
 
 if __name__ == "__main__":
-    config = load_config('src/inpainting_config.yaml')
-    generate_dataset(config)
+    config_path = 'src/inpainting_config.yaml'
+    generate_dataset(config_path)
