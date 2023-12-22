@@ -81,6 +81,7 @@ The notebooks/ directory contains Jupyter notebooks for demonstration and testin
 1. Include functionality to generate the base image dataset in addition to the inpainting one.
 2. Enhance bounding box 'tightness' for even better labels
 3. User Interface
+4. Adding additional label formats (COCO, Pascal VOC, etc.)
 
 ## Known Issues
 1. Sometimes the inpainting fails to generate any noticeable changes.
